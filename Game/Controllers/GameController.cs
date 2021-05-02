@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace Game.Controllers
 {
-    public class AdminController : Controller
+    public class GameController : Controller
     {
-        // GET: AdminController
+        // GET: GameController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: AdminController/Details/5
+        // GET: GameController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AdminController/Create
+        // GET: GameController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AdminController/Create
+        // POST: GameController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -42,13 +42,13 @@ namespace Game.Controllers
             }
         }
 
-        // GET: AdminController/Edit/5
+        // GET: GameController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AdminController/Edit/5
+        // POST: GameController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -63,13 +63,13 @@ namespace Game.Controllers
             }
         }
 
-        // GET: AdminController/Delete/5
+        // GET: GameController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AdminController/Delete/5
+        // POST: GameController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

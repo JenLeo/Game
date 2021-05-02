@@ -24,7 +24,6 @@ namespace Game.Models
         {
         }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -34,11 +33,12 @@ namespace Game.Models
                    .AddJsonFile("appsettings.json")
                    .Build();
                 var connectionString = configuration.GetConnectionString("Server=tcp:lottoead.database.windows.net,1433;" +
-        "Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD};" +
+        "Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD123};" +
         "MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
+
 
 
 
