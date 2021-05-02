@@ -31,8 +31,13 @@ namespace Game.Models
             int number_5 = random.Next(1, 49);
             int number_6 = random.Next(1, 49);
             
+            
         }
 
+        public override string ToString()
+        {
+            return String.Format("DrawID: {0} -  Winning Numbers: {1} ", DrawID, random );
+        }
 
         public virtual Game lotto { get; set; }
 

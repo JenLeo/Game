@@ -10,7 +10,7 @@ namespace Game.Controllers
     public class GameController : Controller
     {
         // GET: GameController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }

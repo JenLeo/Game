@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Game.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,7 @@ namespace GameAPI.Controllers
     {
         // GET: api/<GamesController>
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public IEnumerable<Draw> Get() => Draw;
 
         // GET api/<GamesController>/5
         [HttpGet("{id}")]
