@@ -17,25 +17,27 @@ namespace Game.Models
         public int DrawID { get; set; }
         public String TicketId { get; set; }
 
-        public string WinningNumbers { get; set; }
-
         private Random random;
 
-        public Random PlayGames()
+        public Random WinningNumbers()
         {
             random = new Random();
-            
-            int number_1 = random.Next(1, 49);
-            int number_2 = random.Next(1, 49);
-            int number_3 = random.Next(1, 49);
-            int number_4 = random.Next(1, 49);
-            int number_5 = random.Next(1, 49);
-            int number_6 = random.Next(1, 49);
-            return random;
+            int[] array = new int[3];
+            random = new Random();
+
+            for (int i = 0; i < 6; i++)
+            {
+                int result = random.Next(0, 49);
+                int modulo = result % array.Length;
+                array[modulo]++;
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                return random;
+            }
 
         }
-        
-
+       
         public override string ToString()
         {
             return String.Format("DrawID: {0} -  Winning Numbers: {1}  ", DrawID, random );
