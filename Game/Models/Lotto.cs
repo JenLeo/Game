@@ -16,9 +16,22 @@ namespace Game.Models
         [Required]
         public int DrawID { get; set; }
         public int TicketId { get; set; }
-        
-        [Required]
-        public double Price { get; set; }
+
+        public string WinningNumbers { get; set; }
+
+        private Random random;
+
+        public Lotto()
+        {
+            random = new Random();
+            int number_1 = random.Next(1, 49);
+            int number_2 = random.Next(1, 49);
+            int number_3 = random.Next(1, 49);
+            int number_4 = random.Next(1, 49);
+            int number_5 = random.Next(1, 49);
+            int number_6 = random.Next(1, 49);
+            
+        }
 
 
         public virtual Lotto lotto { get; set; }
