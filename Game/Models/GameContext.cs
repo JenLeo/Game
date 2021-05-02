@@ -8,7 +8,7 @@ namespace Game.Models
 {
     public class GameContext : DbContext
     {
-        public DbSet<Lotto> lotto { get; set; }
+        public DbSet<Game> lotto { get; set; }
 
        
 

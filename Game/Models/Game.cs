@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Game.Models
 {
-    public class Lotto
+    public class Game
     {
 
         // azure connection string;
@@ -21,7 +21,7 @@ namespace Game.Models
 
         private Random random;
 
-        public Lotto()
+        public Game()
         {
             random = new Random();
             int number_1 = random.Next(1, 49);
@@ -34,7 +34,7 @@ namespace Game.Models
         }
 
 
-        public virtual Lotto lotto { get; set; }
+        public virtual Game lotto { get; set; }
 
     }
 }

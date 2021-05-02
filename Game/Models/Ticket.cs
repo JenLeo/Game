@@ -31,6 +31,6 @@ namespace Game.Models
         public DateTime purchased { get; set; }
 
 
-        public virtual ICollection<Lotto> lotto { get; set; }
+        public virtual ICollection<Game> lotto { get; set; }
     }
 }
