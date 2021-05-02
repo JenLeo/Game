@@ -1,0 +1,30 @@
+﻿@model Game.Models.Ticket
+
+@{
+    ViewBag.Title = "Draw";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Game</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Draw)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Draw)
+            @Html.ValidationMessageFor(model => model.Draw)
+        </div>
+        <div class="editor-field">
+            Size @Html.DropDownList("DrawType")
+        </div>
+
+        <p>
+            <input type="submit" value="Selected Draw" />
+        </p>
+    </fieldset>
+}

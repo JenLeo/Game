@@ -1,5 +1,6 @@
 ﻿using Game.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,27 +12,31 @@ namespace Game.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public ActionResult Play()
         {
-            _logger = logger;
+            ViewBag.DrawTypes = new SelectList(Ticket.DrawTypes);
+            return View(new Games() { DrawID = 2 });
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public ActionResult Calculate(AzureCloudService service)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Confirm", service);
+            }
+            else
+            {
+                ViewBag.InstanceSize = new SelectList(AzureCloudService.InstanceSizeDescriptions);
+                return View(service);
+            }
         }
-
-        public IActionResult Privacy()
+        // show confirmation
+        public ActionResult Confirm(AzureCloudService service)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(service);
         }
     }
+}
 }

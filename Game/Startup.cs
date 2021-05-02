@@ -14,13 +14,8 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-
     public class Startup
-
     {
-
-        private readonly IConfiguration _configuration;
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,10 +27,6 @@ namespace Game
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddControllers();
-            
-            services.AddHttpClient();
-            services.AddDbContext<GameContext>(options => options.UseSqlServer(BuildConnectionString()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,13 +52,6 @@ namespace Game
                     name: "default",
                     pattern: "{controller=GameController}/{action=GamePlay}/{id?}");
             });
-        }
-        private string BuildConnectionString()
-        {
-            string connectionString = _configuration.GetConnectionString("AzureConnection");
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
-
-            return builder.ToString();
         }
     }
 }
