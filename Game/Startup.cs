@@ -59,7 +59,7 @@ namespace Game
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=LottoController}/{action=PickDraw}/{id?}");
+                    pattern: "{controller=GameController}/{action=GamePlay}/{id?}");
             });
         }
         private string BuildConnectionString()

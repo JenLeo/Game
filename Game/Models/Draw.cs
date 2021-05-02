@@ -18,7 +18,7 @@ namespace Game.Models
         [Display(Name = "Taking Place")]
         public DateTime draw_dt { get; set; }
 
-        public virtual ICollection<Game> lotto { get; set; }
+        public virtual ICollection<Games> lotto { get; set; }
 
     }
 }

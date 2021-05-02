@@ -49,6 +49,6 @@ namespace Game.Models
         }
 
 
-        public virtual ICollection<Game> lotto { get; set; }
+        public virtual ICollection<Games> lotto { get; set; }
     }
 }

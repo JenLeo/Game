@@ -15,7 +15,7 @@ namespace Game.Models
         //"Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD123};" +
         //"MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-        public DbSet<Game> lottoGame { get; set; }
+        public DbSet<Games> lottoGame { get; set; }
     
         public DbSet<Ticket> ticket { get; set; }
         public DbSet<Draw> draw { get; set; }

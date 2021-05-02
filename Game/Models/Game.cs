@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Game.Models
 {
-    public class Game
+    public class Games
     {
 
         // azure connection string;
@@ -21,25 +21,27 @@ namespace Game.Models
 
         private Random random;
 
-        public Game()
+        public Random PlayGames()
         {
             random = new Random();
+            
             int number_1 = random.Next(1, 49);
             int number_2 = random.Next(1, 49);
             int number_3 = random.Next(1, 49);
             int number_4 = random.Next(1, 49);
             int number_5 = random.Next(1, 49);
             int number_6 = random.Next(1, 49);
-            
-            
+            return random;
+
         }
+        
 
         public override string ToString()
         {
-            return String.Format("DrawID: {0} -  Winning Numbers: {1} ", DrawID, random );
+            return String.Format("DrawID: {0} -  Winning Numbers: {1}  ", DrawID, random );
         }
 
-        public virtual Game lotto { get; set; }
+        public virtual Games lotto { get; set; }
 
     }
 }

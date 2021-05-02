@@ -10,10 +10,17 @@ namespace Game.Controllers
     public class GameController : Controller
     {
         // GET: GameController
-        public IActionResult Index()
+        public IActionResult GamePlay()
         {
+            ViewBag.Title = "Put your page title here";
+            ViewBag.Description = "Put your page description here";
+
+         
+
             return View();
+
         }
+    
 
         // GET: GameController/Details/5
         public ActionResult Details(int id)
