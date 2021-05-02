@@ -20,23 +20,23 @@ namespace Game.Controllers
         }
 
         [HttpPost]
-        public ActionResult Calculate(AzureCloudService service)
+        public ActionResult Games(Ticket d)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Confirm", service);
+                return RedirectToAction("Confirm", d);
             }
             else
             {
-                ViewBag.InstanceSize = new SelectList(AzureCloudService.InstanceSizeDescriptions);
-                return View(service);
+                ViewBag.DrawTypes = new SelectList(Ticket.DrawTypes);
+                return View(d);
             }
         }
         // show confirmation
-        public ActionResult Confirm(AzureCloudService service)
+        public ActionResult Confirm(Ticket d)
         {
-            return View(service);
+            return View(d);
         }
     }
 }
-}
+

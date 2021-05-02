@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Game.Models.Games>
+    @{
+     ViewBag.Title = "Index";
+    }
+    <h2>Index</h2>
+    
+    @using (Html.BeginForm())
+    {
+     <p>
+     Find by name: @Html.TextBox("SearchString")
+     <input type="submit" value="Search" />
+     </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DrawID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WinningNumbers)
+            </th>
+            <th></th>
+        </tr>
+     @foreach (var item in Model)
+     {
+     <tr>
+     <td>
+     @Html.DisplayFor(modelItem => item.DrawID)
+     </td>
+     <td>
+     @Html.DisplayFor(modelItem => item.TicketId)
+     </td>
+     <td>
+     @Html.DisplayFor(modelItem => item.WinningNumbers)
+     </td>
+     <td>
+     @Html.ActionLink("Edit", "Edit", new { id = item.DrawID }) |
+     @Html.ActionLink("Details", "Details", new { id = item.TicketId }) |
+     @Html.ActionLink("Delete", "Delete", new { id = item.WinningNumbers })
+     </td>
+     </tr>
+     }
+    </table>

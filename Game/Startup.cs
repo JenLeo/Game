@@ -45,12 +45,13 @@ namespace Game
             app.UseRouting();
 
             app.UseAuthorization();
+    
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=GameController}/{action=GamePlay}/{id?}");
+                    pattern: "{controller=AdminController}/{action=AIndex}/{id?}");
             });
         }
     }
