@@ -1,7 +1,7 @@
 ﻿@model Game.Models.Ticket
 
 @{
-    ViewBag.Title = "Draw";
+    ViewBag.Title = "Tickets";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -16,6 +16,48 @@
                 <label asp-for="DrawType" class="control-label"></label>
                 @Html.DropDownList("DrawType")
                 <span asp-validation-for="DrawType" class="text-danger"></span>
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number1)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number1)
+                @Html.ValidationMessageFor(model => model.Number1)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number2)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number2)
+                @Html.ValidationMessageFor(model => model.Number2)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number3)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number3)
+                @Html.ValidationMessageFor(model => model.Number3)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number4)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number4)
+                @Html.ValidationMessageFor(model => model.Number4)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number5)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number5)
+                @Html.ValidationMessageFor(model => model.Number5)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Number6)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Number6)
+                @Html.ValidationMessageFor(model => model.Number6)
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>

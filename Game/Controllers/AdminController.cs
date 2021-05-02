@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Game.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Game.Controllers
@@ -10,15 +14,45 @@ namespace Game.Controllers
     public class AdminController : Controller
     {
         // GET: AdminController
-        public ActionResult AdminIndex()
+        public GameContext db = new();
+        public ViewResult AdminIndex(string sortOrder, string searchString)
         {
-            return View();
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "DrawType_desc" : "";
+            var draws = from d in db.draw
+                        select d;
+            switch (sortOrder)
+            {
+                default:
+                    draws = draws.OrderBy(s => s.DrawName);
+                    break;
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                draws = draws.Where(b => b.DrawName.Contains(searchString));
+            }
+            return View(draws.ToList());
+            
         }
 
         // GET: AdminController/Details/5
-        public ActionResult Details(int id)
+       public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Draw draw = db.draw.Find(id);
+            if (draw == null)
+            {
+                return HttpNotFound();
+            }
+            return View(draw);
+
+        }
+
+        private ActionResult HttpNotFound()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: AdminController/Create
@@ -26,20 +60,24 @@ namespace Game.Controllers
         {
             return View();
         }
-
-        // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
+        public ActionResult Create(int DrawID, String TicketId, DateTime draw_dt)
+ {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            catch (DataException)
             {
-                return View();
+                ModelState.AddModelError("" , "Unable to perform task");
             }
+            return View(draw_dt);
+            // POST: AdminController/Create
         }
 
         // GET: AdminController/Edit/5

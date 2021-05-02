@@ -16,13 +16,15 @@ namespace Game.Controllers
         public ActionResult Play()
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
-            return View(new Ticket() { DrawType = "EuroDraw" });
+            return View(new Ticket() { DrawType = "EuroDraw", Number1 = 2, Number2 = 5, Number3 = 17,
+            Number4=22, Number5=36,Number6=41});
         }
-
+         
         [HttpPost]
         public ActionResult Play(Ticket ticket)
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
+            
             return View(ticket);
         }
         // show confirmation
