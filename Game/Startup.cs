@@ -1,5 +1,8 @@
+using Game.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +14,11 @@ using System.Threading.Tasks;
 namespace Game
 {
     public class Startup
+
     {
+
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,6 +30,7 @@ namespace Game
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<GameContext>(options => options.UseSqlServer(BuildConnectionString()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +56,22 @@ namespace Game
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private string BuildConnectionString()
+        {
+            string connectionString = _configuration.GetConnectionString("AzureConnection");
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
+
+            if (_env.IsDevelopment())
+            {
+                builder.Password = _configuration["DbPassword"];
+                if (builder.Password == null)
+                {
+                    Console.WriteLine("No PWD!");
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }
