@@ -19,10 +19,10 @@ namespace Game.Models
 
         private Random random;
 
-        public Random WinningNumbers()
+        public Random GamePlayed()
+
         {
-            random = new Random();
-            int[] array = new int[3];
+            int[] array = new int[6];
             random = new Random();
 
             for (int i = 0; i < 6; i++)
@@ -31,19 +31,19 @@ namespace Game.Models
                 int modulo = result % array.Length;
                 array[modulo]++;
             }
+#pragma warning disable CS0162 // Unreachable code detected
             for (int i = 0; i < array.Length; i++)
+#pragma warning restore CS0162 // Unreachable code detected
             {
                 return random;
             }
+            return random;
+        }
 
-        }
-       
-        public override string ToString()
-        {
-            return String.Format("DrawID: {0} -  Winning Numbers: {1}  ", DrawID, random );
-        }
+
 
         public virtual Games lotto { get; set; }
-
     }
 }
+
+    

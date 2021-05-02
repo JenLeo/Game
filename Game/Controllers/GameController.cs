@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Game.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,10 @@ namespace Game.Controllers
     public class GameController : Controller
     {
         // GET: GameController
-        public IActionResult GamePlay()
+        public ActionResult GamePlay()
         {
-            ViewBag.Title = "Put your page title here";
-            ViewBag.Description = "Put your page description here";
-
-         
-
-            return View();
-
+            ViewBag.GamePlayed = new (Games);
+            return View(new Games());
         }
     
 

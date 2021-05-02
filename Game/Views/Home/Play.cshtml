@@ -6,25 +6,33 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Game</legend>
+<h4>Play To Win</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Play">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DrawType" class="control-label"></label>
+                @Html.DropDownList("DrawType")
+                <span asp-validation-for="DrawType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                @Html.DisplayFor(model => model.Price)
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Total" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Draw)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Draw)
-            @Html.ValidationMessageFor(model => model.Draw)
-        </div>
-        <div class="editor-field">
-            Size @Html.DropDownList("DrawTypeS")
-        </div>
-
-        <p>
-            <input type="submit" value="Selected Draw" />
-        </p>
-    </fieldset>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+            
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

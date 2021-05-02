@@ -15,27 +15,20 @@ namespace Game.Controllers
         [HttpGet]
         public ActionResult Play()
         {
-            ViewBag.DrawTypes = new SelectList(Ticket.DrawTypes);
-            return View(new Games() { DrawID = 2 });
+            ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
+            return View(new Ticket() { DrawType = "EuroDraw" });
         }
 
         [HttpPost]
-        public ActionResult Games(Ticket d)
+        public ActionResult Play(Ticket ticket)
         {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Confirm", d);
-            }
-            else
-            {
-                ViewBag.DrawTypes = new SelectList(Ticket.DrawTypes);
-                return View(d);
-            }
+            ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
+            return View(ticket);
         }
         // show confirmation
-        public ActionResult Confirm(Ticket d)
+        public ActionResult Confirm(Ticket ticket)
         {
-            return View(d);
+            return View(ticket);
         }
     }
 }

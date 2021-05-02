@@ -18,9 +18,9 @@ namespace GameAPI.Controllers
 
         static List<Games> _games = new List<Games>()
             {
-        new Games(){DrawID = 002, TicketId ="234", WinningNumbers="3, 6, 18, 20, 44, 46"},
-        new Games(){DrawID = 001, TicketId ="345", WinningNumbers ="2, 8, 19, 28, 32, 40"},
-        new Games(){DrawID = 003, TicketId ="564", WinningNumbers = "6, 9, 11, 19, 27, 33"}
+        new Games(){DrawID = 002, TicketId ="234"},
+        new Games(){DrawID = 001, TicketId ="345"},
+        new Games(){DrawID = 003, TicketId ="564"}
         };
         // GET: api/<GamesController>
         [HttpGet]
