@@ -13,6 +13,9 @@ namespace Game.Models
 
         // azure connection string;
         // Server=tcp:lottoead.database.windows.net,1433;Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+        [Key]
+        public String GameId { get; set; }
+        
         [Required]
         public int DrawID { get; set; }
         public String TicketId { get; set; }

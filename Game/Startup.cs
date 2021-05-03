@@ -27,6 +27,15 @@ namespace Game
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // Add framework services.
+            services.AddDbContext<GameContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("AzureConnection")));
+
+            services.AddScoped<IDrawRepository, DrawRepository>();
+
+            services.AddMvc();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +60,7 @@ namespace Game
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=AdminController}/{action=AdminIndex}/{id?}");
+                    pattern: "{controller=Admin}/{action=Edit}/{id?}");
             });
         }
     }

@@ -11,18 +11,18 @@ namespace Game.Models
 {
     public class GameContext : DbContext
     {
-        //private const string connectionString = "Server=tcp:lottoead.database.windows.net,1433;" +
-        //"Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD123};" +
-        //"MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-        public DbSet<Games> lottoGame { get; set; }
-    
-        public DbSet<Ticket> ticket { get; set; }
-        public DbSet<Draw> draw { get; set; }
+        private const string connectionString = "Server=tcp:lottoead.database.windows.net,1433; Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD123}; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+
+        
         public GameContext(DbContextOptions<GameContext> options)
 : base(options)
         {
         }
+        public DbSet<Games> lottoGame { get; set; }
+
+        public DbSet<Ticket> ticket { get; set; }
+        public DbSet<Draw> draw { get; set; }
 
         public GameContext()
         {

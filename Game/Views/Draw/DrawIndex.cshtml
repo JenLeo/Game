@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Game.Models.Draw>
+@{
+    ViewBag.Title = "Admin Index";
+}
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DrawID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrawName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.draw_dt)
+        </th>
+
+
+    </tr>
+    @foreach (var draw in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => draw.DrawID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => draw.DrawName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => draw.draw_dt)
+            </td>
+
+        </tr>
+    }
+</table>

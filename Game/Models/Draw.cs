@@ -10,15 +10,20 @@ namespace Game.Models
     {
             
         [Key]
-        public int DrawID { get; set; }
-        [Required]
-        [Display(Name = "Draw")]
-        public string DrawName { get; set; }
-        [Required]
-        [Display(Name = "Taking Place")]
+        [Display(Name = "Draw ID")]
+        public String DrawID { get; set; }
+      
+        [Display(Name = "Draw Name")]
+        public String DrawName { get; set; }
+ 
+        [Display(Name = "When")]
         public DateTime draw_dt { get; set; }
 
-        public virtual ICollection<Games> lotto { get; set; }
+        public class Tckts : Draw
+        {
+            public int Qty { get; set; }
+        }
+        public virtual ICollection<Draw> draw { get; set; }
 
     }
 }

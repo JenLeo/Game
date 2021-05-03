@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,113 +16,150 @@ namespace Game.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: AdminController
-        public GameContext db = new();
-        public ViewResult AdminIndex(string sortOrder, string searchString)
+        private readonly GameContext _context;
+
+
+        public AdminController(IConfiguration configuration, IOptions<GlobalData> globalData, GameContext Context)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "DrawType_desc" : "";
-            var draws = from d in db.draw
-                        select d;
-            switch (sortOrder)
+            _context = Context;
+            try
             {
-                default:
-                    draws = draws.OrderBy(s => s.DrawName);
-                    break;
+                _context.Database.EnsureCreated();
             }
-            if (!String.IsNullOrEmpty(searchString))
+            catch (Exception e)
             {
-                draws = draws.Where(b => b.DrawName.Contains(searchString));
+                Console.WriteLine(e.Message);
             }
-            return View(draws.ToList());
-            
         }
 
-        // GET: AdminController/Details/5
-       public ActionResult Details(int? id)
+        // GET: draw
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.draw.ToListAsync());
+        }
+
+        // GET: draw/Details/5
+        public async Task<IActionResult> Details(String id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return NotFound();
             }
-            Draw draw = db.draw.Find(id);
-            if (draw == null)
+
+            var _draw = await _context.draw.FirstOrDefaultAsync(m => m.DrawID == id);
+            if (_draw == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(draw);
 
+            return View(_draw);
         }
 
-        private ActionResult HttpNotFound()
-        {
-            throw new NotImplementedException();
-        }
-
-        // GET: AdminController/Create
-        public ActionResult Create()
+        // GET: Draw/Create
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
+
+        // POST: Draw/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int DrawID, String TicketId, DateTime draw_dt)
- {
-            try
+        public async Task<IActionResult> Create([Bind("DrawID,DrawName,draw_dt")] Draw _draw)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                _context.Add(_draw);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(_draw);
+        }
+
+        // GET: Draw/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var _draw = await _context.draw.FindAsync(id);
+            if (_draw == null)
+            {
+                return NotFound();
+            }
+            return View(_draw);
+        }
+
+        // POST: Draw/Edit/5
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("DrawID,DrawName,draw_dt")] Draw _draw)
+        {
+            if (id != _draw.DrawID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    _context.Update(_draw);
+                    await _context.SaveChangesAsync();
                 }
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("" , "Unable to perform task");
-            }
-            return View(draw_dt);
-            // POST: AdminController/Create
-        }
-
-        // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ItemExists(_draw.DrawID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(_draw
+                );
         }
 
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Draw/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var _draw = await _context.draw
+                .FirstOrDefaultAsync(m => m.DrawID == id);
+            if (_draw == null)
+            {
+                return NotFound();
+            }
+
+            return View(_draw);
         }
 
-        // POST: AdminController/Delete/5
-        [HttpPost]
+        // POST: Draw/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var _draw = await _context.draw.FindAsync(id);
+            _context.draw.Remove(_draw);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ItemExists(string id)
+        {
+            return _context.draw.Any(e => e.DrawID == id);
         }
     }
 }
