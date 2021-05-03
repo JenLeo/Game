@@ -30,7 +30,7 @@ namespace Game.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Draw _draw)
+        public IActionResult Create(draw _draw)
         {
             if (ModelState.IsValid)
             {

@@ -22,7 +22,7 @@ namespace Game.Models
         public DbSet<Games> lottoGame { get; set; }
 
         public DbSet<Ticket> ticket { get; set; }
-        public DbSet<Draw> draw { get; set; }
+        public DbSet<draw> draw { get; set; }
 
         public GameContext()
         {

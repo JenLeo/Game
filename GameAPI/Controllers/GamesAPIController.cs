@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GameAPI.Controllers
 {
@@ -16,46 +15,25 @@ namespace GameAPI.Controllers
     public class GamesAPIController : ControllerBase
     {
 
-        static List<Games> _games = new List<Games>()
-            {
-        new Games(){DrawID = 002, TicketId ="234"},
-        new Games(){DrawID = 001, TicketId ="345"},
-        new Games(){DrawID = 003, TicketId ="564"}
-        };
-        // GET: api/<GamesController>
-        [HttpGet]
-        public IEnumerable<Games> Get()
+        private List<draw> draws;
+
+       
+        public GamesAPIController()
         {
-            return _games.OrderByDescending(p => p.DrawID);
+            draws = new List<draw>()
+                {
+                    new draw {DrawID = "RG3298", DrawName = "MillionPlus", draw_dt = DateTime.Now},
+                    new draw {DrawID = "BM7623", DrawName = "EuroDraw", draw_dt = DateTime.Now},
+                    new draw {DrawID = "GK5394", DrawName = "MillionPlus", draw_dt = DateTime.Now},
+                    new draw {DrawID = "MS0986", DrawName = "DailyJackpot", draw_dt = DateTime.Now}
+                };
         }
 
-        public IActionResult Get(int id)
+        // GET api/<GamesController>
+        public IHttpActionResult GetAllDraws()
         {
-            Games foundGame = _games.FirstOrDefault(p => p.DrawID == id);
-            if (foundGame != null)
-            {
-                return Ok(foundGame);
-            }
-            return NotFound("NONE FOUND");
+            return (IHttpActionResult)Ok(draws.OrderBy(s => s.DrawID).ToList());
         }
-
-
-        // POST api/<GamesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<GamesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<GamesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+      
     }
 }

@@ -15,12 +15,12 @@ namespace Game
                 _context = context;
             }
 
-            public IEnumerable<Draw> GetDraw()
+            public IEnumerable<draw> GetDraw()
             {
                 return _context.draw.ToList();
             }
 
-            public void InsertDraw(Draw _draw)
+            public void InsertDraw(draw _draw)
             {
                 _context.draw.Add(_draw);
             }

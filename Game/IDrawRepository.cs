@@ -6,9 +6,9 @@ namespace Game
 {
     internal interface IDrawRepository : IDisposable
     {
-        IEnumerable<Draw> GetDraw();
+        IEnumerable<draw> GetDraw();
 
-        void InsertDraw(Draw draw);
+        void InsertDraw(draw draw);
 
         void Save();
     }

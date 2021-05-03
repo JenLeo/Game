@@ -65,7 +65,7 @@ namespace Game.Controllers
         // POST: Draw/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DrawID,DrawName,draw_dt")] Draw _draw)
+        public async Task<IActionResult> Create([Bind("DrawID,DrawName,draw_dt")] draw _draw)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Game.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("DrawID,DrawName,draw_dt")] Draw _draw)
+        public async Task<IActionResult> Edit(string id, [Bind("DrawID,DrawName,draw_dt")] draw _draw)
         {
             if (id != _draw.DrawID)
             {

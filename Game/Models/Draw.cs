@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Models
 {
-    public class Draw
+    public class draw
     {
             
         [Key]
@@ -19,11 +19,22 @@ namespace Game.Models
         [Display(Name = "When")]
         public DateTime draw_dt { get; set; }
 
-        public class Tckts : Draw
+        public class Tckts : draw
         {
             public int Qty { get; set; }
         }
-        public virtual ICollection<Draw> draw { get; set; }
+
+        public static IEnumerable<draw> OrderByDescending(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static object OrderBy(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual ICollection<draw> Draw { get; set; }
 
     }
 }
