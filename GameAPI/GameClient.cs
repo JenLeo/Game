@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
-
+using Game.Controllers;
 
 namespace GameAPI
 {
@@ -32,11 +32,11 @@ namespace GameAPI
                 Console.WriteLine(e.ToString());
             }
         }
-        static void Main()
-        {
-            Task result = RunAsync();               
-            result.Wait();                         
-        }
+        //static void Main()
+        //{
+        //    Task result = RunAsync();               
+        //    result.Wait();                         
+        //}
     }
 }
            
