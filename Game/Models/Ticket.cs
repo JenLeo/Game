@@ -33,34 +33,34 @@ namespace Game.Models
         public String DrawType { get; set; }
 
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 1:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
         [Required(ErrorMessage = "Please choose a number")]
         public int Number1 { get; set; }
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 2:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
-        [Required(ErrorMessage = "Please choose a number")]
+        [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number2 { get; set; }
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 3:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
-        [Required(ErrorMessage = "Please choose a number")]
+        [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number3 { get; set; }
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 4:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
-        [Required(ErrorMessage = "Please choose a number")]
+        [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number4 { get; set; }
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 5:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
-        [Required(ErrorMessage = "Please choose a number")]
+        [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number5 { get; set; }
 
-        [DisplayName("Number :")]
+        [DisplayName("Number 6:")]
         [Range(1, 49, ErrorMessage = "Please choose a number between 1 and 49")]
-        [Required(ErrorMessage = "Please choose a number")]
+        [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number6 { get; set; }
 
         [DisplayName("Price (€):")]

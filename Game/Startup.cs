@@ -51,7 +51,7 @@ namespace Game
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Play}/{id?}");
+                    pattern: "{controller=AdminController}/{action=AdminIndex}/{id?}");
             });
         }
     }
