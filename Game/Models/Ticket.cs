@@ -66,7 +66,7 @@ namespace Game.Models
         [DisplayName("Price (€):")]
         public double Price
         {
-            get                             // calculate 
+            get                             // checkprice
             {
                 double cost = 0;
                 if (DrawType == "EuroDraw")

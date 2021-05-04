@@ -24,8 +24,4 @@
     <Folder Include="Views\Game\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GameUnitTest\GameUnitTest.csproj" />
-  </ItemGroup>
-
 </Project>

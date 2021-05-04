@@ -13,7 +13,7 @@ namespace Game.Controllers
     public class TicketController : Controller
     {
         [HttpGet]
-        public ActionResult Play()
+        public ActionResult BuyTicket()
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
             return View(new Ticket() { DrawType = "EuroDraw", Number1 = 2, Number2 = 5, Number3 = 17,
@@ -21,7 +21,7 @@ namespace Game.Controllers
         }
          
         [HttpPost]
-        public ActionResult Play(Ticket ticket)
+        public ActionResult BuyTicket(Ticket ticket)
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,8 +12,6 @@ namespace Game.Models
     public class Games
     {
 
-        // azure connection string;
-        // Server=tcp:lottoead.database.windows.net,1433;Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
         [Key]
         public String GameId { get; set; }
         
@@ -42,7 +41,7 @@ namespace Game.Models
             }
             return random;
         }
-
+        
 
 
         public virtual Games lotto { get; set; }
