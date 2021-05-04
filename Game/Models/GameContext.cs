@@ -14,7 +14,11 @@ namespace Game.Models
 
         private const string connectionString = "Server=tcp:lottoead.database.windows.net,1433; Initial Catalog=Lotto;Persist Security Info=False;User ID=JenEAD;Password={LottoEAD123}; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
-        
+        public IEnumerable<draw> ToList()
+        {
+            throw new NotImplementedException();
+        }
+
         public GameContext(DbContextOptions<GameContext> options)
 : base(options)
         {

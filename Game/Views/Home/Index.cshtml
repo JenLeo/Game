@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Admin ID</td>
+            <td>@Html.TextBox("Admin ID")</td>
+
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>@Html.Password("Password")</td>
+
+        </tr>
+    </table>
+}
+
+<span style="color:red;font-size:8pt;">
+    @ViewBag.Message
+</span>
+@Html.ActionLink("LogIn", "LogIn")

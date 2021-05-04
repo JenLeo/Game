@@ -1,10 +1,7 @@
-﻿using Game.Models;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,26 +9,38 @@ namespace Game.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
-        public ActionResult Play()
+        // GET: HomeController
+        public ActionResult Index()
         {
-            ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
-            return View(new Ticket() { DrawType = "EuroDraw", Number1 = 2, Number2 = 5, Number3 = 17,
-            Number4=22, Number5=36,Number6=41});
+            return View();
+
         }
-         
+
+
         [HttpPost]
-        public ActionResult Play(Ticket ticket)
+        public ActionResult Index(String AdminID, String Password)
         {
-            ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
-            
-            return View(ticket);
+            if (String.IsNullOrEmpty(AdminID) || String.IsNullOrEmpty(Password))
+            {
+                ViewBag.Message = "Please enter your details ";
+            }
+            else
+            {
+                if (AdminID == "adminid" && Password == "password")
+                {
+                    return RedirectToAction("Welcome", "Home");
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Details ";
+                }
+            }
+            return View();
         }
-        // show confirmation
-        public ActionResult Confirm(Ticket ticket)
+        public ActionResult LogIn()
         {
-            return View(ticket);
+            return RedirectToAction("Index");
         }
     }
-}
 
+}
