@@ -63,68 +63,55 @@ namespace Game.Controllers
         }
 
 
-        //        public async Task<IActionResult> TicketIndex()
-        //        {
-        //            return View(await _context.ticket.ToListAsync());
-        //        }
-        //        public async Task<IActionResult> Details(String id)
-        //        {
-        //            if (id == null)
-        //            {
-        //                return NotFound();
-        //            }
+        public async Task<IActionResult> TicketIndex()
+        {
+            return View(await _context.ticket.ToListAsync());
+        }
+        public async Task<IActionResult> Details(String id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //            var ticket = await _context.ticket.FirstOrDefaultAsync(m => m.Ticket_id == id);
-        //            if (ticket == null)
-        //            {
-        //                return NotFound();
-        //            }
+            var ticket = await _context.ticket.FirstOrDefaultAsync(m => m.Ticket_id == id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
 
-        //            return View(ticket);
-        //        }
+            return View(ticket);
+        }
 
-        //        [HttpGet]
-        //        public IActionResult BuyTicket()
-        //        {
-        //            ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
-        //            return View(new Ticket()
-        //            {
-        //                Ticket_id = DateTime.Now.ToString().GetHashCode().ToString("x"),
-        //                DrawType = "EuroDraw",
-        //                Number1 = 2,
-        //                Number2 = 5,
-        //                Number3 = 17,
-        //                Number4 = 22,
-        //                Number5 = 36,
-        //                Number6 = 41,
-        //                purchased = DateTime.Now
-        //            });
+        // GET: Ticket/Create
+        [HttpGet]
+        public IActionResult TicketCreate()
+        {
+            return View();
+        }
 
-        //        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TicketCreate([Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5,Number6,purchased")] 
+        Ticket _ticket)
 
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public ActionResult BuyTicket([Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5," +
-        //#pragma warning disable MVC1004 // Rename model bound parameter.
-        //            "Number6,purchased")] Ticket _ticket)
-        //#pragma warning restore MVC1004 // Rename model bound parameter.
-        //        {
-        //            try
-        //            {
-        //                if (ModelState.IsValid)
-        //                {
-        //                    _context.ticket.Add(_ticket);
-        //                    _context.SaveChanges();
-        //                    return RedirectToAction("BuyTicket");
-        //                }
-        //            }
-        //            catch (DataException)
-        //            {
-        //                ModelState.AddModelError("", "Error");
-        //            }
-        //            return View(_ticket);
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.ticket.Add(_ticket);
+                    _context.SaveChanges();
+                    return RedirectToAction("BuyTicket");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Error");
+            }
+            return View(_ticket);
 
-        //        }
+        }
 
         //        //GET: Ticket/Edit/5
         //        [HttpGet]
