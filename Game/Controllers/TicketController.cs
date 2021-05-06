@@ -32,7 +32,7 @@ namespace Game.Controllers
             }
         }
         [HttpGet]
-        public ActionResult BuyTicket()
+        public IActionResult BuyTicket()
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
             return View(new Ticket()
@@ -50,12 +50,23 @@ namespace Game.Controllers
         }
 
         [HttpPost]
-        public ActionResult BuyTicket(Ticket _ticket)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BuyTicket([Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5,Number6,Price,purchased")]
+            Ticket ticket)
+        
         {
             ViewBag.DrawType = new SelectList(Ticket.DrawTypes);
+            if (ModelState.IsValid)
+            {
+                _context.Add(ticket);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(TicketIndex));
+            }
+            return View(ticket);
 
-            return View(_ticket);
         }
+
+            
         // show confirmation
         public ActionResult Confirm(Ticket _ticket)
         {
@@ -90,118 +101,96 @@ namespace Game.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult TicketCreate([Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5,Number6,purchased")] 
-        Ticket _ticket)
+       
 
+        //GET: Ticket/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         {
-            try
+            if (id == null)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.ticket.Add(_ticket);
-                    _context.SaveChanges();
-                    return RedirectToAction("BuyTicket");
-                }
+                return NotFound();
             }
-            catch (DataException)
+
+            var _ticket = await _context.ticket.FindAsync(id);
+            if (_ticket == null)
             {
-                ModelState.AddModelError("", "Error");
+                return NotFound();
             }
             return View(_ticket);
-
         }
 
-        //        //GET: Ticket/Edit/5
-        //        [HttpGet]
-        //        public async Task<IActionResult> Edit(string id)
-        //        {
-        //            if (id == null)
-        //            {
-        //                return NotFound();
-        //            }
+        // POST: Ticket/Edit/5
 
-        //            var _ticket = await _context.ticket.FindAsync(id);
-        //            if (_ticket == null)
-        //            {
-        //                return NotFound();
-        //            }
-        //            return View(_ticket);
-        //        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5," +
+                    "Number6,Price,purchased")] Ticket _ticket)
+        {
+            if (id != _ticket.Ticket_id)
+            {
+                return NotFound();
+            }
 
-        //        // POST: Ticket/Edit/5
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(_ticket);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ItemExists(_ticket.Ticket_id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(_ticket
+                );
+        }
 
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public async Task<IActionResult> Edit(string id, [Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5," +
-        //            "Number6,purchased")] Ticket _ticket)
-        //        {
-        //            if (id != _ticket.Ticket_id)
-        //            {
-        //                return NotFound();
-        //            }
+        // GET: Ticket/Delete/5
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //            if (ModelState.IsValid)
-        //            {
-        //                try
-        //                {
-        //                    _context.Update(_ticket);
-        //                    await _context.SaveChangesAsync();
-        //                }
-        //                catch (DbUpdateConcurrencyException)
-        //                {
-        //                    if (!ItemExists(_ticket.Ticket_id))
-        //                    {
-        //                        return NotFound();
-        //                    }
-        //                    else
-        //                    {
-        //                        throw;
-        //                    }
-        //                }
-        //                return RedirectToAction(nameof(Index));
-        //            }
-        //            return View(_ticket
-        //                );
-        //        }
+            var _ticket = await _context.ticket
+                .FirstOrDefaultAsync(m => m.Ticket_id == id);
+            if (_ticket == null)
+            {
+                return NotFound();
+            }
 
-        //        // GET: Ticket/Delete/5
-        //        public async Task<IActionResult> Delete(string id)
-        //        {
-        //            if (id == null)
-        //            {
-        //                return NotFound();
-        //            }
+            return View(_ticket);
+        }
 
-        //            var _ticket = await _context.ticket
-        //                .FirstOrDefaultAsync(m => m.Ticket_id == id);
-        //            if (_ticket == null)
-        //            {
-        //                return NotFound();
-        //            }
+        // POST: Ticket/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var _ticket = await _context.ticket.FindAsync(id);
+            _context.ticket.Remove(_ticket);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
-        //            return View(_ticket);
-        //        }
-
-        //        // POST: Ticket/Delete/5
-        //        [HttpPost, ActionName("Delete")]
-        //        [ValidateAntiForgeryToken]
-        //        public async Task<IActionResult> DeleteConfirmed(string id)
-        //        {
-        //            var _ticket = await _context.ticket.FindAsync(id);
-        //            _context.ticket.Remove(_ticket);
-        //            await _context.SaveChangesAsync();
-        //            return RedirectToAction(nameof(Index));
-        //        }
-
-        //        private bool ItemExists(string id)
-        //        {
-        //            return _context.ticket.Any(e => e.Ticket_id == id);
-        //        }
+        private bool ItemExists(string id)
+        {
+            return _context.ticket.Any(e => e.Ticket_id == id);
+        }
 
 
-        //    }
     }
 }
 

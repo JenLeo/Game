@@ -73,6 +73,7 @@ namespace Game.Models
         [Required(ErrorMessage = "Please choose a number between 1 and 49")]
         public int Number6 { get; set; }
 
+        
         [DisplayName("Price (€):")]
         public double Price
         {
@@ -109,8 +110,6 @@ namespace Game.Models
             throw new NotImplementedException();
         }
 
-        public virtual ICollection<Ticket> ticket
-        { get; set; }
 
     }
 }
