@@ -13,7 +13,12 @@ namespace Game.Models
         [Key]
         [Display(Name = "Draw ID")]
         public String DrawID { get; set; }
-      
+
+        public static Task Run(Func<GameContext, Task> p)
+        {
+            throw new NotImplementedException();
+        }
+
         [Display(Name = "Draw Name")]
         public String DrawName { get; set; }
  
