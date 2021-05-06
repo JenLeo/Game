@@ -12,7 +12,7 @@
         <h2>@ViewBag.Title</h2>
 
         <hr />
-        <p>Select a draw, enter your lucky numbers then click <strong>Check Price</strong>.</p>
+        <p> <strong>Select a draw & enter your lucky numbers!</strong>.</p>
         <div class="row">
             <div class="col-md-4">
 
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="purchased" class="control-label"></label>
-                        @Html.DisplayFor(model => model.purchased)
+                        <input asp-for="purchased" class="form-control" />
                         <span asp-validation-for="purchased" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -82,9 +82,9 @@
                         @Html.DisplayFor(model => model.Price)
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <input type="submit" value="Check Price" class="btn btn-primary" />
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <input type="submit" value="Buy Ticket" class="btn btn-primary" />
                     </div>
@@ -103,7 +103,7 @@
     </html>
 
 @*@model Game.Models.Ticket
-
+    
 @{
     ViewData["Title"] = "Buy Ticket";
 }

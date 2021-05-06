@@ -60,7 +60,7 @@ namespace Game.Controllers
             {
                 _context.Add(ticket);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(TicketIndex));
+                return RedirectToAction(nameof(Confirm));
             }
             return View(ticket);
 
@@ -150,7 +150,7 @@ namespace Game.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(TicketIndex));
             }
             return View(_ticket
                 );
@@ -182,7 +182,7 @@ namespace Game.Controllers
             var _ticket = await _context.ticket.FindAsync(id);
             _context.ticket.Remove(_ticket);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(TicketIndex));
         }
 
         private bool ItemExists(string id)
