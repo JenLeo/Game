@@ -14,6 +14,10 @@ namespace GameAPI.Controllers
     [ApiController]
     public class GamesAPIController : ControllerBase
     {
+        public static void Main(string[] args)
+        {
+         
+        }
         public IEnumerable<draw> Get()
         {
             using (GameContext dbcontext = new GameContext())

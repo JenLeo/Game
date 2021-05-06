@@ -25,17 +25,7 @@ namespace Game.Models
         [Display(Name = "When")]
         public DateTime draw_dt { get; set; }
 
-        //public draw(String drawId, String drawName, DateTime _Datetime)
-        //{
-        //    this.DrawID = drawId;
-        //    this.DrawName = drawName;
-        //    this.draw_dt = _Datetime;
-
-        //}
-
-        //public draw()
-        //{
-        //}
+      
 
         public static IEnumerable<draw> OrderByDescending(Func<object, object> p)
         {

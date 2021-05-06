@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Game.Models
 {
+    
     public class Ticket
     {
         //ticket prices
@@ -15,7 +19,13 @@ namespace Game.Models
         const double MPCost = 8.00;
 
         [Key]
-        public string Ticket_id { get; set; }
+        [Display(Name = "Ticket ID")]
+        public String Ticket_id { get; set; }
+
+        public static Task Run(Func<GameContext, Task> t)
+        {
+            throw new NotImplementedException();
+        }
 
 
         [Display(Name = "Draw")]
@@ -85,14 +95,22 @@ namespace Game.Models
                 return cost;
             }
         }
+
+        [Display(Name = "Purchased:")]
         public DateTime purchased { get; set; }
 
-        public class BuyTicket : Ticket
+        public static IEnumerable<Ticket> OrderByDescending(Func<object, object> p)
         {
-            public int Qty { get; set; }
+            throw new NotImplementedException();
         }
 
+        public static object OrderBy(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
 
-        public virtual ICollection<Games> lotto { get; set; }
+        public virtual ICollection<Ticket> ticket
+        { get; set; }
+
     }
 }

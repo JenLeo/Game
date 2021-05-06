@@ -1,91 +1,178 @@
 ﻿@model Game.Models.Ticket
 
-@{
-    ViewBag.Title = "Play To Win";
-}
-<!DOCTYPE html>
-<html lang="en">
-
-<body>
-
-
-    <h2>@ViewBag.Title</h2>
-
-    <hr />
-    <p>Select a draw, enter your lucky numbers then click <strong>Check Price</strong>.</p>
-    <div class="row">
-        <div class="col-md-4">
-
-            <form asp-action="BuyTicket">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="DrawType" class="control-label"></label>
-                    @Html.DropDownList("DrawType")
-                    <span asp-validation-for="DrawType" class="text-danger"></span>
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number1)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number1)
-                    @Html.ValidationMessageFor(model => model.Number1)
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number2)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number2)
-                    @Html.ValidationMessageFor(model => model.Number2)
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number3)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number3)
-                    @Html.ValidationMessageFor(model => model.Number3)
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number4)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number4)
-                    @Html.ValidationMessageFor(model => model.Number4)
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number5)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number5)
-                    @Html.ValidationMessageFor(model => model.Number5)
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Number6)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Number6)
-                    @Html.ValidationMessageFor(model => model.Number6)
-                </div>
-                <div class="form-group">
-                    <label asp-for="Price" class="control-label"></label>
-                    @Html.DisplayFor(model => model.Price)
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Check Price" class="btn btn-primary" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Buy Ticket" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        ViewBag.Title = "Play To Win";
     }
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <body>
+
+
+        <h2>@ViewBag.Title</h2>
+
+        <hr />
+        <p>Select a draw, enter your lucky numbers then click <strong>Check Price</strong>.</p>
+        <div class="row">
+            <div class="col-md-4">
+
+                <form asp-action="BuyTicket">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Ticket_id" class="control-label"></label>
+                        <input asp-for="Ticket_id" class="form-control" />
+                        <span asp-validation-for="Ticket_id" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DrawType" class="control-label"></label>
+                        @Html.DropDownList("DrawType")
+                        <span asp-validation-for="DrawType" class="text-danger"></span>
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number1)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number1)
+                        @Html.ValidationMessageFor(model => model.Number1)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number2)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number2)
+                        @Html.ValidationMessageFor(model => model.Number2)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number3)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number3)
+                        @Html.ValidationMessageFor(model => model.Number3)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number4)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number4)
+                        @Html.ValidationMessageFor(model => model.Number4)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number5)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number5)
+                        @Html.ValidationMessageFor(model => model.Number5)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Number6)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Number6)
+                        @Html.ValidationMessageFor(model => model.Number6)
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="purchased" class="control-label"></label>
+                        @Html.DisplayFor(model => model.purchased)
+                        <span asp-validation-for="purchased" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        @Html.DisplayFor(model => model.Price)
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Check Price" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Buy Ticket" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+    </body>
+    </html>
+
+@*@model Game.Models.Ticket
+
+@{
+    ViewData["Title"] = "Buy Ticket";
+}
+
+<h1>Play To Win</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BuyTicket">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ticket_id" class="control-label"></label>
+                <input asp-for="Ticket_id" class="form-control" />
+                <span asp-validation-for="Ticket_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrawType" class="control-label"></label>
+                <input asp-for="DrawType" class="form-control" />
+                <span asp-validation-for="DrawType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number1" class="control-label"></label>
+                <input asp-for="Number1" class="form-control" />
+                <span asp-validation-for="Number1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number2" class="control-label"></label>
+                <input asp-for="Number2" class="form-control" />
+                <span asp-validation-for="Number2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number3" class="control-label"></label>
+                <input asp-for="Number3" class="form-control" />
+                <span asp-validation-for="Number3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number4" class="control-label"></label>
+                <input asp-for="Number4" class="form-control" />
+                <span asp-validation-for="Number4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number5" class="control-label"></label>
+                <input asp-for="Number5" class="form-control" />
+                <span asp-validation-for="Number5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number6" class="control-label"></label>
+                <input asp-for="Number6" class="form-control" />
+                <span asp-validation-for="Number6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="purchased" class="control-label"></label>
+                <input asp-for="purchased
+                       " class="form-control" />
+                <span asp-validation-for="purchased" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buy Ticket" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@

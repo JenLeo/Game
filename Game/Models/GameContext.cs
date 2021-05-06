@@ -19,6 +19,8 @@ namespace Game.Models
             throw new NotImplementedException();
         }
 
+
+
         public GameContext(DbContextOptions<GameContext> options)
 : base(options)
         {
