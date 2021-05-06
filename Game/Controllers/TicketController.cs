@@ -74,9 +74,21 @@ namespace Game.Controllers
         }
 
 
-        public async Task<IActionResult> TicketIndex()
+        //public async Task<IActionResult> TicketIndex()
+        //{
+        //    return View(await _context.ticket.ToListAsync());
+        //}
+        public async Task<IActionResult> TicketIndex(string searchString)
         {
-            return View(await _context.ticket.ToListAsync());
+            var tks = from t in _context.ticket
+                        select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tks = tks.Where(s => s.DrawType.Contains(searchString));
+            }
+
+            return View(await tks.ToListAsync());
         }
         public async Task<IActionResult> Details(String id)
         {

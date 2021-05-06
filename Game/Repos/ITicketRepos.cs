@@ -14,5 +14,11 @@ namespace Game
             void InsertDraw(Ticket ticket);
 
             void Save();
-        }
+
+        Task<Ticket> Create(Ticket ticket);
+        Task<bool> Update(Ticket ticket);
+        Task<bool> Delete(string id);
+        IQueryable<Ticket> GetAll();
+
+    }
     }

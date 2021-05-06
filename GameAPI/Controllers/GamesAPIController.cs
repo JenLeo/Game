@@ -16,7 +16,7 @@ namespace GameAPI.Controllers
     {
         public static void Main(string[] args)
         {
-         
+
         }
         public IEnumerable<draw> Get()
         {
@@ -24,7 +24,7 @@ namespace GameAPI.Controllers
             {
                 return dbcontext.ToList();
             }
-               
+
         }
 
         [Route("api/draws/1")]

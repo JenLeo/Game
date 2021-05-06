@@ -33,9 +33,21 @@ namespace Game.Controllers
         }
 
         // GET: draw
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.draw.ToListAsync());
+        //}
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.draw.ToListAsync());
+            var draws = from d in _context.draw
+                         select d;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                draws = draws.Where(s => s.DrawName.Contains(searchString));
+            }
+
+            return View(await draws.ToListAsync());
         }
 
         // GET: draw/Details/5

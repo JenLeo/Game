@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+<script language="javascript">
+
+    function display() {
+        if ($("#txtadminID").attr("value") == "") {
+            alert("Please Enter your UserName.");
+            return false;
+        } else if ($("#txtpassword").attr("value") == "") {
+            alert("Please enter Password.");
+            return false;
+        }
+        alert("Login Successful");
+        return true;
+    }
+</script>
+@using (Html.BeginForm())
+{
+<table width="40%" cellpadding="1" cellspacing="5">
+    <tr>
+        <td colspan="2" style="color:#f00;font-size:larger">@ViewBag.Status</td>
+    </tr>
+        <tr>
+            <td>Admin ID</td>
+            <td>@Html.TextBox("Admin ID")</td>
+
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>@Html.Password("Password")</td>
+
+        </tr>
+</table>
+<td colspan="2">
+    <input type="submit" value="Login" title="login" onclick=" display();" />
+</td>
+} 
