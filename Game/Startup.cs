@@ -1,8 +1,6 @@
 
 using Game.Models;
-using HotChocolate;
 using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;

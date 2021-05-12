@@ -5,13 +5,17 @@
 }
 
 <h1>Details</h1>
-
 <div>
-    <h4>Draw</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DrawID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrawID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrawName)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DrawName)
@@ -19,8 +23,25 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.draw_dt)
         </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.draw_dt)
+        </dd>
     </dl>
 </div>
+
+@*<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayFor(model => model.DrawID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrawName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayFor(model => model.draw_dt)
+        </dt>
+    </dl>
+</div>*@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.DrawID">Edit</a> |
     <a asp-action="Index">Back to List</a>
