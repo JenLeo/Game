@@ -17,7 +17,7 @@ namespace Game.Controllers
     public class TicketController : Controller
     {
         private readonly GameContext _context;
-        private object ticket;
+        
 
         public TicketController(IConfiguration configuration, IOptions<GlobalData> globalData, GameContext Context)
         {
