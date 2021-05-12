@@ -7,7 +7,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        Search by draw name: @Html.TextBox("SearchString")
+        Search by Ticket ID: @Html.TextBox("SearchString")
         <input type="submit" value="Search" />
     </p>
 }
@@ -27,17 +27,22 @@
     </tr>
     @foreach (var draw in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => draw.DrawID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => draw.DrawName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => draw.draw_dt)
-            </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => draw.DrawID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => draw.DrawName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => draw.draw_dt)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@draw.DrawID">Edit</a> |
+        <a asp-action="Details" asp-route-id="@draw.DrawID">Details</a> |
+        <a asp-action="Delete" asp-route-id="@draw.DrawID">Delete</a>
+    </td>
 
-        </tr>
+</tr>
     }
 </table>

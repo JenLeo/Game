@@ -22,10 +22,10 @@ namespace Game.Models
         [Display(Name = "Ticket ID")]
         public String Ticket_id { get; set; }
 
-        public static Task Run(Func<GameContext, Task> t)
-        {
-            throw new NotImplementedException();
-        }
+        //public static Task Run(Func<GameContext, Task> t)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         [Display(Name = "Draw")]
@@ -105,10 +105,10 @@ namespace Game.Models
             throw new NotImplementedException();
         }
 
-        public static object OrderBy(Func<object, object> p)
-        {
-            throw new NotImplementedException();
-        }
+        //public static object OrderBy(Func<object, object> p)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
     }

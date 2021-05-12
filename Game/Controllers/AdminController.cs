@@ -37,6 +37,13 @@ namespace Game.Controllers
         //{
         //    return View(await _context.draw.ToListAsync());
         //}
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View(_context.draw.ToList());
+        }
+
+       
         public async Task<IActionResult> Index(string searchString)
         {
             var draws = from d in _context.draw
@@ -44,7 +51,7 @@ namespace Game.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                draws = draws.Where(s => s.DrawName.Contains(searchString));
+                draws = draws.Where(s => s.DrawID.Contains(searchString));
             }
 
             return View(await draws.ToListAsync());
@@ -77,6 +84,7 @@ namespace Game.Controllers
         // POST: Draw/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("DrawID,DrawName,draw_dt")] draw _draw)
         {
             if (ModelState.IsValid)
@@ -86,6 +94,7 @@ namespace Game.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(_draw);
+           
         }
 
         // GET: Draw/Edit/5

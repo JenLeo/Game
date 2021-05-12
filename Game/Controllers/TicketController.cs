@@ -17,7 +17,7 @@ namespace Game.Controllers
     public class TicketController : Controller
     {
         private readonly GameContext _context;
-
+        private object ticket;
 
         public TicketController(IConfiguration configuration, IOptions<GlobalData> globalData, GameContext Context)
         {
@@ -85,12 +85,12 @@ namespace Game.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                tks = tks.Where(s => s.DrawType.Contains(searchString));
+                tks = tks.Where(s => s.Ticket_id.Contains(searchString));
             }
 
             return View(await tks.ToListAsync());
         }
-        public async Task<IActionResult> Details(String id)
+        public async Task<IActionResult> TicketDetails(String id)
         {
             if (id == null)
             {
@@ -117,7 +117,7 @@ namespace Game.Controllers
 
         //GET: Ticket/Edit/5
         [HttpGet]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> TicketEdit(string id)
         {
             if (id == null)
             {
@@ -136,7 +136,7 @@ namespace Game.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5," +
+        public async Task<IActionResult> TicketEdit(string id, [Bind("Ticket_id,DrawType,Number1,Number2,Number3,Number4,Number5," +
                     "Number6,Price,purchased")] Ticket _ticket)
         {
             if (id != _ticket.Ticket_id)
@@ -169,7 +169,7 @@ namespace Game.Controllers
         }
 
         // GET: Ticket/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> TicketDelete(string id)
         {
             if (id == null)
             {

@@ -16,7 +16,11 @@ namespace Game
                 _context = context;
             }
 
-            public IEnumerable<draw> GetDraw()
+        public DrawRepository()
+        {
+        }
+
+        public IEnumerable<draw> GetDraw()
             {
                 return _context.draw.ToList();
             }
